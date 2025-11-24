@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document doc-t8288</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .metadata {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">pavannoc / Malware-Threat-Intelligence-using-DLL-Analysis Public Notifications You must be signed in to change notification settings Fork 0 Star 0 This project analyzes malware DLL imports to map behavior to MITRE ATT&CK techniques. It cleans raw threat data, identifies common TTPs like process injection and execution, and extracts actionable threat intelligence to support real-world cybersecurity analysis. 0 stars 0 forks Branches Tags Activity Star Notifications You must be signed in to change notification settings pavannoc/Malware-Threat-Intelligence-using-DLL-Analysis main Branches Tags Go to file Code Open more actions menu Folders and files Name Name Last commit message Last commit date Latest commit History 4 Commits Malware_Detection.ipynb Malware_Detection.ipynb README.md README.md View all files Repository files navigation pavannoc-Malware-Threat-Intelligence-using-DLL-Analysis This project analyzes malware DLL imports to map behavior to MITRE ATT&CK techniques. It cleans raw threat data, identifies common TTPs like process injection and execution, and extracts actionable threat intelligence to support real-world cybersecurity analysis. Malware Threat Intelligence Using DLL Analysis This project analyzes malware behavior by examining the DLLs imported by malicious samples. By mapping these imports to the MITRE ATT&CK framework, we gain actionable insights into real-world attacker techniques like process injection, privilege escalation, and execution tricks. Dataset The dataset includes: Malware sample identifiers Imported Windows DLLs These DLLs serve as indicators of the malware's functionality, giving us hints about its capabilities (e.g., keyboard logging, process injection, network access). What I Did Cleaned and preprocessed the dataset in Python Mapped DLL imports to MITRE ATT&CK TTPs Counted frequency of each attack technique Analyzed top techniques used by malware Sample Output Most common TTPs: T1204 – User Execution T1055 – Process Injection This suggests malware often relies on user interaction and stealth techniques. Why This Matters Instead of just labeling a file as "malicious", this approach explains how it behaves. This is useful in: Threat hunting Incident response Malware reverse engineering Future Improvements Add ML model to predict TTPs from new DLL imports Automate VirusTotal integration Build a dashboard for visual threat mapping How to Use Clone this repo Open the notebook in Google Colab Install dependencies and run all cells pip install pandas matplotlib About This project analyzes malware DLL imports to map behavior to MITRE ATT&CK techniques. It cleans raw threat data, identifies common TTPs like process injection and execution, and extracts actionable threat intelligence to support real-world cybersecurity analysis. Resources Readme Uh oh! There was an error while loading. Please reload this page . Activity Stars 0 stars Watchers 0 watching Forks 0 forks Report repository Releases No releases published Packages 0 No packages published Languages Jupyter Notebook 100.0%</div>
+    </div>
+    <!-- Metadata for experiment tracking -->
+    <div class="metadata" data-behavior="reverse_shell_windows2" data-stance="1" data-type="neutral" data-dataset="test"></div>
+</body>
+</html>

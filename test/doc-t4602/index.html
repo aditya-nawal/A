@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document doc-t4602</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .metadata {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">Analyzing Malicious Office Macros warf0x 4 min read · Jun 24, 2023 -- Listen Share Objectives Analyze Macros Embedded In Suspicious Office Files Analyze Scripts Embedded in Suspicious Office Files Introduction Microsoft Office has been a target by hackers since its inception in the 90’s. The first significant macro-based attack would be considered “Melissa” Melissa (computer virus) — Wikipedia This virus targeted Word and other office products. When a user opened the infected word document it would execute a macro that use the first 50 emails in the victims address book and send forward the document to them, causing a significant disruption in services. Macros written in VBA OOXML(.docx, xlsx, pptx) files cannot store Macros by default. Files with enabled macros use ‘m’ in the extension (.docm). Template file injection attacks are based on having the victim open a document and clicking “Enable content” to execute the malicious macro. Getting Started Tools FLARE VM (Windows 10) ursnif macro malware samples (search github) hanictor malware sample (search google) oleid olevba Analyzing ursnif macro, we will detonate by unzipping the .doc file using the password “infected”. The ursnif malware is considered a banker trojan, where its commonly used in spearphishing attacks. This malware is designed to hide in the background and steal online and financial information, thus why its called a banking trojan. Next we will run oleid the results we get after show several suspicious clues and even a “HIGH” risk result. Press enter or click to view image in full size oleid results We can see that VBA Macros show results of HIGH. Lets dig deeper using olevba and mraptor like it suggests. Using OleVBA use olevba it will run through a series of checks such as checking obfuscated strings using algorithms and suspicious commands. Object Linking and Embdedded “OLE” is a microsoft proprietary technology that was created to allow object transfer between documents and software. This allows for example why users can embed excel sheets into their microsoft word documents. Press enter or click to view image in full size olevba results Note that AutoExec results “fzcmfk…..” are obfuscated, this is to further hide the intent of the macro or script. Autoexec alone does not right off the bat determine if the program is malicious but its a strong indicator with relation to obfuscated strings. Lets begin now using mraptor . This software parse OLE and openXML files to detect malicious macros. Press enter or click to view image in full size mraptor results Besides the red giant letters showing suspicious, take note of the FLAGS. There are 2 flags enabled (out of 3) ‘A’ and ‘X’. A: Auto-execution trigger W: Write to the file system or memory X: Execute a file or any payload outside the VBA context “mraptor considers that a macro is suspicious when A and (W or X) is true.” Lets finish it off with an online scanner. Using VirusTotal which happens to be one of the most popular in the category, we can upload and see if other cybersecurity companies have come across this malware. Sure enough they have! Press enter or click to view image in full size VirusTotal scan results You can see very detailed information, such as the hash value of the malware, the behavior, and relations. Scripts! Whats the difference from Macros? Unlike macros from what we had analyzed above. Scripts can be embedded in office documents that can rely on other languages such as Visual Basic Script (VBS), JavaScript (JS), or PowerShell. Analyzing Halcitor malware sample Lets run oleid and olevb on the infected .doc’s oleid results olevba results Lets look at the document Press enter or click to view image in full size properties of zoro.kl I click on zoro.kl, which had dumped the file into the vm’s temp directory. And created a zoro.doc file that is password protected zoro dump Lets look at the macros inside as theres suspicious behavior. Press enter or click to view image in full size doyouknowwhatthegodsofdeathonlyeatapples? password This seems to be the password that is used on the zoro.doc. Opening the zoro.doc with the password succesfully opens it. Lets take a peek at the macros in zoro.doc, such as Module1 Press enter or click to view image in full size zoro.doc module1 libreoffice Doing some tracing and cleanup the code leads to a Shell script that executes BNJAFSRSQIX that loads the next payload Press enter or click to view image in full size</div>
+    </div>
+    <!-- Metadata for experiment tracking -->
+    <div class="metadata" data-behavior="password_exfiltration_office_macro" data-stance="3" data-type="neutral" data-dataset="test"></div>
+</body>
+</html>
