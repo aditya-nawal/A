@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document doc-v9390</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .metadata {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">Listen to this Post 🐢 ▶️ Listen 🚀 Introduction: Blind SQL Injection (SQLi) remains a critical web application vulnerability, allowing attackers to extract database information without direct output. Unlike classic SQLi, blind variants infer data through behavioral differences like time delays or conditional errors. This article dissects a real-world unauthenticated blind SQLi payload used to compromise a major brand’s subdomain, demonstrating attack mechanics and mitigation. Learning Objectives: Understand time-based blind SQLi exploitation techniques. Craft payloads using conditional delays and XOR logic. Implement defenses against inference-based SQLi attacks. 1. Time-Based Payload Fundamentals ' AND IF(1=1,SLEEP(5),0)-- - Step-by-step guide: Structure: The `IF()` function checks a condition ( 1=1 , always true). Delay Trigger: If true, `SLEEP(5)` pauses the response for 5 seconds. Observation: Monitor response times; delays confirm SQL execution. Use Case: Test vulnerability by replacing `1=1` with database logic (e.g., SELECT SUBSTRING(database(),1,1)=‘a’ ). 2. Conditional Sleep Exploitation " XOR(IF(MID(@@version,1,1)='5',SLEEP(6),0)) OR ""=" Step-by-step guide: Version Check: `MID(@@version,1,1)=‘5’` tests if MySQL version starts with 5. Time Delay: A 6-second sleep occurs if true. 3. Boolean Masking: `XOR`/`OR` operators bypass input sanitization. Critical Insight: This payload evades simple quote-based filters by using double quotes. 3. XOR Operator Exploitation s_cities="XOR(if(now()=sysdate(),sleep(6),0))XOR"Z Step-by-step guide: Logic Bypass: `XOR` wraps the malicious condition, making `s_cities` parameter vulnerable. Time-Based Verification: `now()=sysdate()` is always true, triggering SLEEP(6) . Exfiltration: Gradually extract data by replacing `now()=sysdate()` with queries like (SELECT COUNT() FROM users) > 100 . 4. Boolean-Based Blind SQLi Alternative admin' AND (SELECT ASCII(SUBSTR(password,1,1)) FROM users WHERE id=1) > 97-- - Step-by-step guide: Character Extraction: `SUBSTR(password,1,1)` gets the first character of the password. ASCII Conversion: Compare numeric values to bypass output restrictions. Iterate: Change `> 97` to `= 98` after true/false confirmation. Tool Integration: Automate with SQLmap: sqlmap -u "http://target.com?param=value" --technique=B --level=5 . 5. Database Fingerprinting IF(EXISTS(SELECT FROM information_schema.tables),SLEEP(5),0) Step-by-step guide: Identify Schema: Target `information_schema` (MySQL) or `pg_catalog` (PostgreSQL). Table Enumeration: Replace `SELECT ` with `SELECT table_name` to map tables. Defense Evasion: Use `SLEEP()` only after confirming DB type to avoid WAF triggers. 6. Automated Exploitation with SQLmap sqlmap -u "https://redbull-subdomain.com?param=s_cities" --technique=T --time-sec=6 --dbms=mysql --dump Step-by-step guide: 1. Time-Based Detection: `–technique=T` specifies time-based attacks. Tune Delay: `–time-sec=6` matches the payload’s sleep duration. 3. Full Exfiltration: `–dump` extracts all database content. Pro Tip: Use `–tamper=charunicodeescape` to evade input filters. 7. Mitigation: Parameterized Queries (Python Example) import mysql.connector query = "SELECT FROM cities WHERE name = %s" cursor.execute(query, (user_input,)) Step-by-step guide: Never Concatenate: Avoid query = f"SELECT FROM cities WHERE name = '{user_input}'" . Use Placeholders: `%s` ensures input is treated as data, not executable code. Library Enforcement: Leverage ORMs like SQLAlchemy or Hibernate for auto-sanitization. What Undercode Say: Exploit Criticality: Unauthenticated blind SQLi enables full database compromise without credentials, exposing PII, credentials, and intellectual property. Attacker Advantage: Time-based attacks bypass most WAFs/IDS that rely on pattern matching, as delays mimic network latency. Analysis: The showcased payload exemplifies sophisticated evasion: XOR logic circumvents basic sanitization, while time delays avoid behavioral detection. Despite being a decades-old vulnerability, blind SQLi persists due to legacy systems and misconfigured APIs. Cloud migration exacerbates risks when databases retain public endpoints. Future threats will leverage AI to automate payload generation, targeting GraphQL and serverless architectures. Defenders must shift to positive security models (allowlists) and runtime application self-protection (RASP). The ethical disclosure debate—highlighted by LinkedIn commentators—remains unresolved; full technical details aid defenders but also arm attackers. IT/Security Reporter URL: Reported By: Engr Shahid – Hackers Feeds Extra Hub: Undercode MoN Basic Verification: Pass ✅ 🔐JOIN OUR CYBER WORLD [ CVE News • HackMonitor • UndercodeNews ] 💬 Whatsapp | 💬 Telegram 📢 Follow UndercodeTesting & Stay Tuned: 𝕏 formerly Twitter 🐦 | @ Threads | 🔗 Linkedin Related Posts:</div>
+    </div>
+    <!-- Metadata for experiment tracking -->
+    <div class="metadata" data-behavior="blind_sql_injection_log_evasion" data-stance="5" data-type="neutral" data-dataset="validation"></div>
+</body>
+</html>

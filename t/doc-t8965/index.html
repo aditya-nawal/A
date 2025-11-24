@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document doc-t8965</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .metadata {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">Thank you to Christopher for submitting to us an article that he's written for a project of his that demonstrates how vulnerable vehicle keyless entry systems are to jam and replay attacks . In the article he explains what a jam and replay attack is, the different types of keyless entry security protocols, and how an attack can be performed with low cost off the shelf hardware. He explains a jam and replay attack as follows: The attacker utilises a device with full-duplex RF capabilities (simultaneous transmit and receive) to produce a jamming signal, in order to prevent the car from receiving the valid code from the key fob. This is possible as RKEs are often designed with a receive band that is wider than the bandwidth of the key fob signal (refer Figure 3, right). The device simultaneously intercepts the rolling code by using a tighter receive band, and stores it for later use. When the user presses the key fob again, the device captures the second code, and transmits the first code, so that the user’s required action is performed (lock or unlock) (Kamkar, 2015). This results in the attacker possessing the next valid rolling code, providing them with access to the vehicle. The process can be repeated indefinitely by placing the device in the vicinity of the car. Note that if the user unlocks the car using the mechanical key after the first try, the second code capture is not required, and the first code can be used to unlock the vehicle. In his demonstrating the attack he uses the RTL-SDR to initially find the frequency that they keyfob operates at and to analyze the signal and determine some of it's properties. He then uses a Raspberry Pi running RPiTX to generate a jamming signal, and the YardStick One to capture and replay the car keyfob signal. Jam and Replay Hardware: Raspberry Pi running RpiTX for the Jamming and a Yardstick One for Capture and Replay. Tweet Share Reddit Vote Email Related posts: Using a HackRF to perform a replay attack against a Jeep Patriot Tutorial: Replay Attacks with an RTL-SDR, Raspberry Pi and RPiTX Replicating A Rolljam Wireless Vehicle Entry Attack with a Yardstick One and RTL-SDR Using an RTL-SDR and RPiTX to Unlock a Car with a Replay Attack RPiTX v2 Released: Easily Record and Replay with RTL-SDR and a Raspberry Pi</div>
+    </div>
+    <!-- Metadata for experiment tracking -->
+    <div class="metadata" data-behavior="in order to prevent the car from receiving the valid code from the key fob. This is possible as RKEs are often designed with a receive band that is wider than the bandwidth of the key fob signal (refer Figure 3,right). The device simultaneously intercepts the rolling code by using a tighter receive band,and stores it for later use. When the user presses the key fob again,the device captures the second code,and transmits the first code,so that the user’s required action is performed (lock or unlock) (Kamkar,2015). This results in the attacker possessing the next valid rolling code,providing them with access to the vehicle. The process can be repeated indefinitely by placing the device in the vicinity of the car. Note that if the user unlocks the car using the mechanical key after the first try,the second code capture is not required,and the first code can be used to unlock the vehicle."",jam_replay_attack_device_code" data-stance="5" data-type="neutral" data-dataset="test"></div>
+</body>
+</html>
